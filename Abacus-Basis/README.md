@@ -101,12 +101,15 @@ Die Scripts haben neue beziehungsweise geänderte Hashes. Beide eigenständigen 
 | App-Typ | Windows-App (Win32) |
 | Name | AbaClient Basis 4.3 |
 | Beschreibung | Gemeinsamer AbaClient 4.3.1194 mit Benutzerpräferenzen und Java-Firewallregeln; Voraussetzung für Abacus Productiv und Abacus Archiv |
-| Herausgeber | Abacus |
-| App-Version | 4.3.1194, falls als Metadaten gepflegt |
-| Kategorie | Eure bisherige Kategorie; optional |
-| Als hervorgehobene App anzeigen | Nein, sofern nicht ausdrücklich gewünscht |
-| Informations-URL / Datenschutz-URL | Optional, nach euren Vorgaben |
-| Entwickler / Besitzer / Notizen / Logo | Nach euren bisherigen Einstellungen; optional |
+| Herausgeber | Abacus Research AG |
+| App-Version | 4.3.1194 |
+| Kategorie | keine |
+| Als hervorgehobene App anzeigen | Nein |
+| Informations-URL / Datenschutz-URL | [https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389](https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389) |
+| Entwickler | Abacus Research AG |
+| Besitzer | IT CH |
+| Logo | optional |
+
 
 ### Programm
 
@@ -152,7 +155,7 @@ Andere nicht zugeordnete Rückgabecodes gelten als Fehler. `1605` bei einer MSI-
 | Einstellung | Wert |
 | --- | --- |
 | Betriebssystemarchitektur | x64 |
-| Mindestbetriebssystem | Windows 11 21H2, entsprechend der bisherigen Paketkonfiguration |
+| Mindestbetriebssystem | Windows 11 21H2 |
 | Mindestfreier Speicher / RAM / Prozessoranzahl / CPU-Takt | Keine zusätzlichen Regeln |
 | Zusätzliche Anforderungsregeln | Keine |
 
@@ -162,19 +165,30 @@ Die Mindestversion ist die technische Paketanforderung. Für den produktiven Bet
 
 **Regelformat: Erkennungsregeln manuell konfigurieren. Beide Regeln müssen erfüllt sein.** Keine PowerShell-Erkennungsdatei notwendig.
 
-| Regel | Einstellung | Wert |
-| --- | --- | --- |
-| MSI | MSI-ProductCode | {D1BEBC97-E763-418E-B999-BD5FD75A9BA5} |
-| MSI | MSI-Produktversionsprüfung | Nein, entsprechend der zuletzt übermittelten Intune-Konfiguration |
-| Registry | Schlüsselpfad | HKEY_LOCAL_MACHINE\SOFTWARE\AbacusDeployment\Basis |
-| Registry | Wertname | PackageRevision |
-| Registry | Erkennungsmethode | Zeichenfolgenvergleich |
-| Registry | Operator / Wert | Gleich / 1 |
-| Registry | Einer 32-Bit-App auf 64-Bit-Clients zugeordnet | Nein |
+**Regel 1 – MSI:**
 
-Die MSI-Regel prüft das Vorhandensein des Clients; der Registry-Marker signalisiert die abgeschlossene Basiskonfiguration. Die Script-Installation selbst prüft die MSI-Version. Wenn ihr die Versionsprüfung bereits zusätzlich aktiviert habt, kann sie auf **grösser oder gleich 4.3.1194** bleiben.
+| Einstellung | Wert |
+| --- | --- |
+| Regeltyp | MSI |
+| MSI-Produktcode | `{D1BEBC97-E763-418E-B999-BD5FD75A9BA5}` – aus der bestehenden SCCM-Konfiguration mitgeteilt; muss zur paketierten MSI gehören |
+| MSI-Produktversionsprüfung | Nein |
 
-Ein bereits erfüllter Marker bewirkt, dass Intune die App als installiert erkennt. Das Hochladen eines neuen Script-Pakets erzwingt deshalb keine erneute Installation auf bereits erkannten Geräten.
+Der tatsächliche ProductCode und die ProductVersion stehen beim Installationsstart in `Basis-Install.log`. `MsiVersion` im Basis-Registry-Schlüssel zeigt die erkannte installierte Version, die bei einer bereits neueren Installation abweichen kann. Die ProductVersion der paketierten MSI wurde nicht als separate Ausgabe mitgeteilt.
+
+**Regel 2 – Basiskonfiguration:**
+
+| Einstellung | Wert |
+| --- | --- |
+| Regeltyp | Registrierung |
+| Schlüsselpfad | `HKEY_LOCAL_MACHINE\SOFTWARE\AbacusDeployment\Basis` |
+| Wertname | `PackageRevision` |
+| Erkennungsmethode | Zeichenfolgenvergleich |
+| Operator | Gleich |
+| Wert | `1` |
+| Einer 32-Bit-App auf 64-Bit-Clients zugeordnet | Nein |
+
+Diese zweite Regel sorgt dafür, dass eine vorhandene SCCM-MSI ohne unsere Basiskonfiguration noch nicht als fertig eingerichtet gilt.
+
 
 ### Abhängigkeiten, Ablösung und Bereichstags
 
