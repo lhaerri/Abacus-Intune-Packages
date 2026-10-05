@@ -46,7 +46,7 @@ Vorher `Source\Files\AbacusArchiv.abalink` ergaenzen. Setup-Datei ist Install.ps
 | Name | Abacus Archiv |
 | Beschreibung | Zugang zur Abacus-Archivumgebung auf DCHABACARCHIV01. Erstellt Verknüpfungen auf dem Desktop und im Startmenü. |
 | Herausgeber | Abacus Research AG |
-| App-Version, falls angezeigt | 1.0 – unsere Paketversion |
+| App-Version, falls angezeigt | 1.1 |
 | Kategorie | Leer lassen |
 | Als ausgewählte App im Unternehmensportal anzeigen | Nein |
 | Informations-URL | [https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389](https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389) |
