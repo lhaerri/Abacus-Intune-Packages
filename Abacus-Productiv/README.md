@@ -41,12 +41,20 @@ Vorher `Source\Files\AbacusProductiv.abalink` ergaenzen. Setup-Datei ist Install
 
 ### App-Informationen
 
-- Typ: Windows-App (Win32).
-- Name: Abacus Productiv.
-- Beschreibung: Verbindung zu DCHABAC02; benoetigt AbaClient Basis.
-- Herausgeber: Abacus.
-- Version: 1, entsprechend PackageRevision; optional.
-- Kategorie, Logo, Besitzer, URLs und Bereichstags: nach euren bisherigen Einstellungen.
+| Einstellung | Wert |
+| --- | --- |
+| Name | Abacus Productiv |
+| Beschreibung | Zugang zur Abacusumgebung auf DCHABAC02. Erstellt Verknüpfungen auf dem Desktop und im Startmenü. |
+| Herausgeber | Abacus Research AG |
+| App-Version, falls angezeigt | 1.1 |
+| Kategorie | Leer lassen |
+| Als ausgewählte App im Unternehmensportal anzeigen | Nein |
+| Informations-URL | [https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389](https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389) |
+| Datenschutz-URL | Leer lassen |
+| Entwickler | Abacus Research AG |
+| Besitzer | IT CH |
+| Notizen | Server: DCHABAC02. Benötigt AbaClient Basis. Paketrevision: 1. |
+| Logo | Optional Abacus-Logo |
 
 ### Programm
 
@@ -94,13 +102,27 @@ Manuell konfigurieren. **Alle vier Regeln muessen erfuellt sein.** Bei jeder Reg
 | Datei | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AbaClient | Abacus Productiv.lnk | Datei vorhanden |
 | Datei | C:\Users\Public\Desktop | Abacus Productiv.lnk | Datei vorhanden |
 
-### Abhaengigkeiten und Zuweisungen
+### Abhängigkeiten
 
-- AbaClient Basis 4.3 als Abhaengigkeit, automatisch installieren: Ja.
-- Keine Ablösung zwischen Productiv und Archiv; beide koennen parallel installiert sein.
-- Erforderlich: `GROUP-M365-CH-APP-AbacusProductiv`, entsprechend eurer bestehenden Zuweisung.
-- Deinstallieren nur ueber eure separate Deinstallationsgruppe; fuer dasselbe Ziel keine widerspruechliche Installations-/Deinstallationszuweisung.
-- Zum ersten Test auf die Testgruppe begrenzen.
+| Einstellung | Wert |
+| --- | --- |
+| Abhängigkeit hinzufügen | AbaClient Basis 4.3 |
+| Automatisch installieren | Ja |
+
+Intune installiert die Basis bei Bedarf zuerst. Eine eigene direkte Zuweisung der Basis ist dafür nicht erforderlich. Falls die Abhängigkeit im Erstellungsassistenten noch nicht verfügbar ist, nach dem Erstellen unter **Eigenschaften → Abhängigkeiten** ergänzen. Abacus Productiv ist keine Abhängigkeit.
+
+### Zuweisungen
+
+| Einstellung | Wert |
+| --- | --- |
+| Erforderlich / Required | GROUP-M365-CH-APP-AbacusProductiv |
+| Für registrierte Geräte verfügbar | Keine Zuweisung |
+| Deinstallieren | GROUP-M365-CH-APP-AbacusProductiv-Uninstall |
+| Endbenutzerbenachrichtigungen | Benachrichtigungen bei Geräte Neustart anzeigen |
+| Verfügbarkeit | So bald wie möglich |
+| Installationsdeadline | So bald wie möglich |
+| Übermittlungsoptimierungspriorität | Hintergrund |
+Die neuen Install.ps1 und Uninstall.ps1 gemaess eurem bestehenden Seculution-Verfahren freigeben. Eine erfolgreiche Syntaxpruefung ersetzt keinen Windows-/Intune-/Seculution-Test.
 
 Die neuen Install.ps1 und Uninstall.ps1 gemaess eurem bestehenden Seculution-Verfahren freigeben. Eine erfolgreiche Syntaxpruefung ersetzt keinen Windows-/Intune-/Seculution-Test.
 
