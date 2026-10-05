@@ -199,14 +199,12 @@ Diese zweite Regel sorgt dafür, dass eine vorhandene SCCM-MSI ohne unsere Basis
 
 ### Zuweisungen
 
-| Zweck | Einstellung |
+| Zweck | Gruppe |
 | --- | --- |
-| Basis über Link-App bereitstellen | Die automatische Abhängigkeit in Productiv/Archiv verwenden. Dafür benötigt die Basis keine zusätzliche eigene Erforderlich-Zuweisung. |
-| Basis separat testen | Erforderlich an eure bestehende, eng begrenzte Testgruppe zuweisen |
-| Productiv bereitstellen | GROUP-M365-CH-APP-AbacusProductiv bei der Productiv-App unter Erforderlich |
-| Archiv bereitstellen | GROUP-M365-CH-APP-AbacusArchiv bei der Archiv-App unter Erforderlich |
-| Basis entfernen | Separate, gezielte Deinstallationszuweisung erst nach Entfernung beider Link-Apps und ihrer Installationszuweisungen |
-| Verfügbare Bereitstellung | Für die Basis im bisherigen Abhängigkeitsmodell nicht erforderlich |
+| Required | Keine, wird mit Dependencie installiert |
+| Uninstall | GROUP-M365-CH-APP-AbacusArchiv-Uninstall |
+| Uninstall | GROUP-M365-CH-APP-AbacusProductiv-Uninstall |
+
 
 Benachrichtigungen, Verfügbarkeit, Fristen und Bereitstellungsoptimierung entsprechend euren bestehenden Zuweisungen übernehmen. Für denselben Benutzer beziehungsweise dasselbe Gerät keine widersprüchliche Installations-/Deinstallationszuweisung setzen.
 
