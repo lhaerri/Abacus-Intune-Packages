@@ -41,12 +41,20 @@ Vorher `Source\Files\AbacusArchiv.abalink` ergaenzen. Setup-Datei ist Install.ps
 
 ### App-Informationen
 
-- Typ: Windows-App (Win32).
-- Name: Abacus Archiv.
-- Beschreibung: Verbindung zu DCHABACARCHIV01; benoetigt AbaClient Basis.
-- Herausgeber: Abacus.
-- Version: 1, entsprechend PackageRevision; optional.
-- Kategorie, Logo, Besitzer, URLs und Bereichstags: nach euren bisherigen Einstellungen.
+| Einstellung | Wert |
+| --- | --- |
+| Name | Abacus Archiv |
+| Beschreibung | Zugang zur Abacus-Archivumgebung auf DCHABACARCHIV01. Erstellt Verknüpfungen auf dem Desktop und im Startmenü. |
+| Herausgeber | Abacus Research AG |
+| App-Version, falls angezeigt | 1.0 – unsere Paketversion |
+| Kategorie | Leer lassen |
+| Als ausgewählte App im Unternehmensportal anzeigen | Nein |
+| Informations-URL | [https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389](https://support.dannemann.com/#knowledge_base/1/locale/de-de/answer/389) |
+| Datenschutz-URL | Leer lassen |
+| Entwickler | Abacus Research AG |
+| Besitzer | IT CH |
+| Notizen | Server: DCHABACARCHIV01. Benötigt AbaClient Basis. Paketrevision: 1. |
+| Logo | Optional Abacus-Logo |
 
 ### Programm
 
@@ -71,7 +79,7 @@ Diese Befehle setzen Windows unter C:\Windows voraus und sind fuer den Intune-Au
 | Installationsverhalten | System |
 | Installationszeit | 10 Minuten |
 | Neustartverhalten | Keine bestimmte Aktion |
-| Verfuegbare Deinstallation zulassen | Nach bisheriger Einstellung; bei Abhaengigkeiten kann der Portal-Button fehlen |
+| Verfuegbare Deinstallation zulassen | Nein |
 | Rueckgabecode 0 | Erfolg |
 | Rueckgabecode 1 | Fehler |
 | Rueckgabecode 1618 | Wiederholen (gleichzeitiger Vorgang) |
@@ -94,14 +102,26 @@ Manuell konfigurieren. **Alle vier Regeln muessen erfuellt sein.** Bei jeder Reg
 | Datei | C:\ProgramData\Microsoft\Windows\Start Menu\Programs\AbaClient | Abacus Archiv.lnk | Datei vorhanden |
 | Datei | C:\Users\Public\Desktop | Abacus Archiv.lnk | Datei vorhanden |
 
-### Abhaengigkeiten und Zuweisungen
+### Abhängigkeiten
 
-- AbaClient Basis 4.3 als Abhaengigkeit, automatisch installieren: Ja.
-- Keine Ablösung zwischen Productiv und Archiv; beide koennen parallel installiert sein.
-- Erforderlich: `GROUP-M365-CH-APP-AbacusArchiv`, entsprechend eurer bestehenden Zuweisung.
-- Deinstallieren nur ueber eure separate Deinstallationsgruppe; fuer dasselbe Ziel keine widerspruechliche Installations-/Deinstallationszuweisung.
-- Zum ersten Test auf die Testgruppe begrenzen.
+| Einstellung | Wert |
+| --- | --- |
+| Abhängigkeit hinzufügen | AbaClient Basis 4.3 |
+| Automatisch installieren | Ja |
 
+Intune installiert die Basis bei Bedarf zuerst. Eine eigene direkte Zuweisung der Basis ist dafür nicht erforderlich. Falls die Abhängigkeit im Erstellungsassistenten noch nicht verfügbar ist, nach dem Erstellen unter **Eigenschaften → Abhängigkeiten** ergänzen. Abacus Productiv ist keine Abhängigkeit.
+
+### Zuweisungen
+
+| Einstellung | Wert |
+| --- | --- |
+| Erforderlich / Required | GROUP-M365-CH-APP-AbacusArchiv |
+| Für registrierte Geräte verfügbar | Keine Zuweisung |
+| Deinstallieren | GROUP-M365-CH-APP-AbacusArchiv-Uninstall |
+| Endbenutzerbenachrichtigungen | Benachrichtigungen bei Geräte Neustart anzeigen |
+| Verfügbarkeit | So bald wie möglich |
+| Installationsdeadline | So bald wie möglich |
+| Übermittlungsoptimierungspriorität | Hintergrund |
 Die neuen Install.ps1 und Uninstall.ps1 gemaess eurem bestehenden Seculution-Verfahren freigeben. Eine erfolgreiche Syntaxpruefung ersetzt keinen Windows-/Intune-/Seculution-Test.
 
 Quelle fuer direkte 64-Bit-PowerShell-Aufrufe und Intune-Einstellungen: https://learn.microsoft.com/en-us/intune/app-management/deployment/add-win32
