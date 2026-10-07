@@ -171,7 +171,9 @@ Die Mindestversion ist die technische Paketanforderung. Für den produktiven Bet
 | --- | --- |
 | Regeltyp | MSI |
 | MSI-Produktcode | `{D1BEBC97-E763-418E-B999-BD5FD75A9BA5}` – aus der bestehenden SCCM-Konfiguration mitgeteilt; muss zur paketierten MSI gehören |
-| MSI-Produktversionsprüfung | Nein |
+| MSI-Produktversionsprüfung | Ja |
+| Operator | Grösser oder gleich |
+| Version | Tatsächliche ProductVersion der paketierten MSI |
 
 Der tatsächliche ProductCode und die ProductVersion stehen beim Installationsstart in `Basis-Install.log`. `MsiVersion` im Basis-Registry-Schlüssel zeigt die erkannte installierte Version, die bei einer bereits neueren Installation abweichen kann. Die ProductVersion der paketierten MSI wurde nicht als separate Ausgabe mitgeteilt.
 
