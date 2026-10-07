@@ -37,3 +37,27 @@ Productiv und Archiv erhalten in Intune **AbaClient Basis** als Abhängigkeit mi
 | Catalog folder | `N` | `N` | `N` |
 
 Das Tool verpackt den gesamten jeweiligen Source-Ordner inklusive Unterordnern. Die drei getrennt erzeugten `Install.intunewin` in Intune als **Windows-App (Win32)** hochladen und gemäss der jeweiligen Detail-README konfigurieren. READMEs gehören nicht in die Source-Ordner.
+
+## Update vorgehen
+
+### MSI Update
+
+Vorgehen bei einem Update der MSI:
+1. Aufschreiben von ProductVersion, ProductCode, MSI-Name
+2. In Install.ps1 und Uninstall.ps1 den MSI-Dateinamen ändern: `$script:MsiName = 'DATEINAME-DER-NEUEN-MSI.msi'`
+3. Neues .intunewin Paket erstellen
+4. Neues Paket in App hochladen
+5. Paket auf neues Testdevice mit Seculution verteilen, welches die App nicht installiert hat (Falls keines Verfügbar, auf einem Device zuerst das alte Paket deinstallieren)
+6. Installer in Seculution freigeben
+7. Detection Rules anpassen auf neue MSI
+8. Uninstall testen und in Seculution freigeben
+
+### Abalink Update
+
+Vorgehen bei einem Update der Abalink Datei:
+1. Neue Abalink Datei erstellen
+2. Neues .intunewin Paket erstellen
+3. Neues Paket in App hochladen
+4. Paket auf neues Testdevice mit Seculution verteilen, welches die App nicht installiert hat (Falls keines Verfügbar, auf einem Device zuerst das alte Paket deinstallieren)
+5. Installer in Seculution freigeben
+6. Uninstall testen und in Seculution freigeben
